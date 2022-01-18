@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <title>{%block title%}Titulek{%endblock%}</title>
+    
+    <link rel="stylesheet" 
+          href="{{ url_for('static', filename='styles.css')}}">
+
+</head>
+
+<body>
+
+<h1>FARMIČKA</h1>
+
+<p>
+Nějáké základní info o hnojivech a krmivech.
+</p>
+
+<ul>
+    <li><a href="{{ url_for('index') }}">Hlavní stránka</a></li>
+    <li><a href="{{ url_for('kejda') }}">Kejda</a></li>
+    <li><a href="{{ url_for('siláž') }}">Siláž</a></li>
+    <li><a href="{{ url_for('silo') }}">Silo</a></li>
+    <li><a href="{{ url_for('login') }}">Loging</a></li>
+    
+</ul>
+
+<p class="login">
+{% if 'user' in session %}
+Jsi přihlášen jako <strong>{{ session.get('user') }}</strong>. 
+<a href="{{ url_for('logout') }}">Odhlásit!</a>
+{% else %}
+Nejsi přihlášen. 
+<a href="{{ url_for('login') }}">Přihlásit!</a>
+{% endif %}
+</p>
+
+
+{% for category, message in get_flashed_messages(with_categories=true) %}
+    <p class="message {{ category }}">{{ message }}</p>
+{% endfor %}
+
+
+{% block obsah %}
+
+
+
+
+
+
+{% endblock obsah %} 
+
+</body>
+</html>
+
